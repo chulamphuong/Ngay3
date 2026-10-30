@@ -1,0 +1,32 @@
+﻿@model Ngay3.Models.Product
+
+<h2>Sửa sản phẩm</h2>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <p>Tên sản phẩm:</p>
+    <input asp-for="Name" />
+
+    <p>Giá sản phẩm:</p>
+    <input asp-for="Price" />
+
+    <p>Mô tả:</p>
+    <input asp-for="Description" />
+
+    <p>Chọn Category:</p>
+
+    <select asp-for="CategoryId" asp-items="ViewBag.Categories">
+        <option value="">-- Chọn Category --</option>
+    </select>
+
+    <span asp-validation-for="CategoryId" style="color:red"></span>
+
+    <br /><br />
+
+    <button type="submit">Lưu thay đổi</button>
+
+    <a asp-action="Index">Quay lại</a>
+</form>

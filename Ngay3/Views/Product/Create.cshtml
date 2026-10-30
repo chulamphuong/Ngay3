@@ -1,0 +1,32 @@
+﻿@model Ngay3.Models.Product
+
+<h2>Thêm sản phẩm</h2>
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <p>Tên sản phẩm:</p>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name" style="color:red"></span>
+
+    <p>Giá sản phẩm:</p>
+    <input asp-for="Price" />
+    <span asp-validation-for="Price" style="color:red"></span>
+
+    <p>Mô tả:</p>
+    <input asp-for="Description" />
+
+    <p>Chọn Category có sẵn:</p>
+
+    <select asp-for="CategoryId" asp-items="ViewBag.Categories">
+        <option value="">-- Chọn Category --</option>
+    </select>
+
+    <span asp-validation-for="CategoryId" style="color:red"></span>
+
+    <br /><br />
+
+    <button type="submit">Thêm sản phẩm</button>
+
+    <a asp-action="Index">Quay lại</a>
+</form>

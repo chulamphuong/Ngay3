@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Ngay3.Models.Product>
+
+@{
+    var categories = ViewBag.Categories as List<Ngay3.Models.Category>;
+}
+
+<h2>DANH SÁCH HÀNG HÓA</h2>
+
+<form asp-action="Index" method="get">
+    <label>Chọn mã hàng hóa:</label>
+
+    <select name="id" asp-items="ViewBag.ProductIds">
+        <option value="">-- Tất cả hàng hóa --</option>
+    </select>
+
+    <button type="submit">Tìm kiếm</button>
+
+    <a asp-action="Index">Hiển thị tất cả</a>
+</form>
+
+<br />
+
+<a asp-action="Create">Thêm hàng hóa mới</a>
+
+<br />
+<br />
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Mã hàng hóa</th>
+        <th>Tên hàng hóa</th>
+        <th>Giá</th>
+        <th>Mã Category</th>
+        <th>Tên Category</th>
+        <th>Chức năng</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var category = categories.FirstOrDefault(
+        c => c.Id == item.CategoryId
+        );
+
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>@item.Price.ToString("N0") VNĐ</td>
+            <td>@item.CategoryId</td>
+            <td>@category?.Name</td>
+
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Chi tiết</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Sửa</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+            </td>
+        </tr>
+    }
+</table>
